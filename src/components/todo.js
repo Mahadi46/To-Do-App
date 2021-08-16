@@ -19,7 +19,8 @@ function Todo() {
   const[items,setItems]=useState(getLocalItems)
   const[toggleSubmit,setToggleSubmit]=useState(true)
   const[isEditItem,setIsEditItem]= useState(null)
-  const[searchTerm,SetSearchTerm]=useState(items)
+
+  const[searchTerm,setSearchTerm]=useState(items)
 
   const addItem=()=>{
     if(!inputData){
@@ -84,7 +85,7 @@ function Todo() {
         return (post.name.toLowerCase().indexOf(value.toLowerCase())) >-1 });
         
       console.log(newPosts)
-      setInputData(newPosts)
+      setSearchTerm(newPosts)
    
   }
 
@@ -130,10 +131,9 @@ function Todo() {
             }
              
            </div>
-
-           <div className="showItems">
+            <div className="showItems">
              {
-               items.map((element)=>{
+               searchTerm.map((element)=>{
                  return (
                      <div className="eachItem" key={element.id}>
                        <h3>{element.name}</h3>
@@ -147,9 +147,11 @@ function Todo() {
                  )
                })
              }
-              
-              
+  
            </div>
+
+
+          
            <div className="showItems">
               <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}><span>
               CHECK LIST</span></button>
