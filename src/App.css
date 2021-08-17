@@ -10,10 +10,13 @@
 html {
   font-size: 62.5%;
 }
-
+.Search-items {
+  background: black;
+  text-align: right;
+}
 .main-div {
   min-height: 100vh;
-  background: #000448;
+  background: #060822;
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -139,7 +142,7 @@ input:focus {
   cursor: pointer;
   pointer-events: auto;
   z-index: 10;
-  color: rgb(251, 251, 251);
+  color: rgb(47, 214, 122);
   -webkit-transition: color 0.15s linear;
   transition: color 0.15s linear;
   font-size: 2rem;

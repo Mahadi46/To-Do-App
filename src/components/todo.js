@@ -2,6 +2,7 @@ import React,{useState,useEffect,useCallback}from 'react'
 import todo from "../images/todo.svg"
 import "../App.css"
 
+//localstorage
 const getLocalItems=()=>{
   const list=localStorage.getItem('lists')
 
@@ -13,16 +14,20 @@ const getLocalItems=()=>{
   }
 
 }
+
+
 function Todo() {
   
   const[inputData,setInputData]=useState('')
   const[items,setItems]=useState(getLocalItems)
   const[toggleSubmit,setToggleSubmit]=useState(true)
   const[isEditItem,setIsEditItem]= useState(null)
-
   const[searchTerm,setSearchTerm]=useState(items)
 
+  //Add Item
+
   const addItem=()=>{
+
     if(!inputData){
       alert("plz write something")
     }
@@ -36,7 +41,7 @@ function Todo() {
            return element;
          })
        )
-       setToggleSubmit(false)
+       setToggleSubmit(true)
        setInputData('')
        setIsEditItem(null)
     }
@@ -50,6 +55,9 @@ function Todo() {
     }
     
   }
+
+  //Delete Item
+
   const deleteItem=(index)=>{
     const updateItems= items.filter((element)=>{
       return index!=element.id;
@@ -57,9 +65,13 @@ function Todo() {
     setItems(updateItems)
   }
 
+  //Delete All
+
   const removeAll=()=>{
     setItems([])
   }
+
+  //Edit Item
 
   const editItem=(id)=>{
 
@@ -72,20 +84,21 @@ function Todo() {
      setIsEditItem(id)
   }
 
+
   useEffect(() => {
   
     localStorage.setItem('lists',JSON.stringify(items))
      
   }, [items])
 
+  //Searchbar
 
   const handleChange = (value)=>{
      
         const newPosts = items.filter(function(post){
         return (post.name.toLowerCase().indexOf(value.toLowerCase())) >-1 });
         
-      console.log(newPosts)
-      setSearchTerm(newPosts)
+       setSearchTerm(newPosts)
    
   }
 
@@ -105,17 +118,19 @@ function Todo() {
 
 
     return (
+
       <React.Fragment>
+      <div className="Search-items">
+             <input type="text" placeholder="search item.." onChange={(e)=>optimizedFn(e.target.value)} />
+      </div>
+
       <div className="main-div">
 
-          <div className="add items">
-             <input type="text" placeholder="search item" onChange={(e)=>optimizedFn(e.target.value)} />
-           </div>
-
+          
          <div className="child-div">
            <figure>
-             <img src={todo} alt="todologo" />
-             <figcaption>Add your list here</figcaption>
+             
+             <figcaption>To-Do List</figcaption>
            </figure>
 
            <div className="add items">
