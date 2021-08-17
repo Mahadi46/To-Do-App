@@ -23,6 +23,7 @@ function Todo() {
   const[toggleSubmit,setToggleSubmit]=useState(true)
   const[isEditItem,setIsEditItem]= useState(null)
   const[searchTerm,setSearchTerm]=useState(items)
+  const[temp,setTemp]=useState('')
 
   //Add Item
 
@@ -42,7 +43,7 @@ function Todo() {
          })
        )
        setToggleSubmit(true)
-       setInputData('')
+       setInputData("")
        setIsEditItem(null)
     }
 
@@ -94,11 +95,13 @@ function Todo() {
   //Searchbar
 
   const handleChange = (value)=>{
-     
+      
         const newPosts = items.filter(function(post){
         return (post.name.toLowerCase().indexOf(value.toLowerCase())) >-1 });
         
        setSearchTerm(newPosts)
+       
+     
    
   }
 
@@ -120,8 +123,29 @@ function Todo() {
     return (
 
       <React.Fragment>
+
       <div className="Search-items">
-             <input type="text" placeholder="search item.." onChange={(e)=>optimizedFn(e.target.value)} />
+             <input type="text" placeholder="search item.." onChange={(e)=>{optimizedFn(e.target.value);setTemp(e.target.value)}} />
+             {temp?
+             <div className="showItems">
+             {
+               searchTerm.map((element)=>{
+                 return (
+                     <div className="eachItem" key={element.id}>
+                         <h3>{element.name}</h3>
+                         <div className="todo-btn">
+                           <i className="far fa-edit add-btn" title="Edit item" onClick={()=>editItem(element.id)} ></i>
+                           <i className="far fa-trash-alt add-btn" title="Delete item" onClick={()=>deleteItem(element.id)} ></i>
+                       
+                        </div>
+                      
+                    </div>
+                 )
+               })
+              }
+              
+           </div>:null}
+
       </div>
 
       <div className="main-div">
@@ -147,7 +171,7 @@ function Todo() {
             </div>
             <div className="showItems">
              {
-               searchTerm.map((element)=>{
+               items.map((element)=>{
                  return (
                      <div className="eachItem" key={element.id}>
                        <h3>{element.name}</h3>
