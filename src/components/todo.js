@@ -133,19 +133,18 @@ function Todo() {
              <figcaption>To-Do List</figcaption>
            </figure>
 
-           <div className="add items">
-             <input type="text" placeholder="Add items.." 
-             value={inputData}
-             onChange={(e)=>setInputData(e.target.value)}
-             />
-            {
-              toggleSubmit ? <i className="fa fa-plus add-btn" title="Add Item" onClick={addItem}></i>:
-              <i className="far fa-edit add-btn" title="Update item" onClick={addItem} ></i>
+             <div className="add items">
+               <input type="text" placeholder="Add items.." 
+                value={inputData}
+                onChange={(e)=>setInputData(e.target.value)}
+               />
+               {
 
-                              
-            }
+                 toggleSubmit ? <i className="fa fa-plus add-btn" title="Add Item" onClick={addItem}></i>:
+                 <i className="far fa-edit add-btn" title="Update item" onClick={addItem} ></i>             
+               }
              
-           </div>
+            </div>
             <div className="showItems">
              {
                searchTerm.map((element)=>{
@@ -162,11 +161,8 @@ function Todo() {
                  )
                })
              }
-  
            </div>
 
-
-          
            <div className="showItems">
               <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}><span>
               CHECK LIST</span></button>
