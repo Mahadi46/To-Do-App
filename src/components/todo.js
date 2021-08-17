@@ -79,7 +79,7 @@ function Todo() {
      const newEditItem = items.find((element)=>{
           return element.id === id;
      })
-     console.log(newEditItem)
+     
      setToggleSubmit(false)
      setInputData(newEditItem.name)
      setIsEditItem(id)
@@ -143,7 +143,7 @@ function Todo() {
                  )
                })
               }
-              
+
            </div>:null}
 
       </div>
